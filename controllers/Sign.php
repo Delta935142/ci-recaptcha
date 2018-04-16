@@ -33,10 +33,8 @@ class Sign extends CI_Controller {
 		}
 		else
 		{
-			$resp = $this->recaptcha->verifyResponse(
-				$this->input->ip_address(),
-				$this->input->post('g-recaptcha-response')
-			);
+			$resp = $this->recaptcha->verifyResponse($this->input->post('g-recaptcha-response'));
+			if (isset($resp['success']) and $resp['success'] === true) echo "You got it!";
 		}
 	}
 }
