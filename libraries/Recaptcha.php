@@ -2,9 +2,6 @@
 /**
  * CodeIgniter Recaptcha library
  *
- * @package CodeIgniter
- * @author  Bo-Yi Wu <appleboy.tw@gmail.com>
- * @link    https://github.com/appleboy/CodeIgniter-reCAPTCHA
  */
 class Recaptcha
 {
@@ -89,53 +86,5 @@ class Recaptcha
             'success' => $status,
             'error-codes' => (isset($error)) ? $error : null,
         );
-    }
-    /**
-     * Render Script Tag
-     *
-     * onload: Optional.
-     * render: [explicit|onload] Optional.
-     * hl: Optional.
-     * see: https://developers.google.com/recaptcha/docs/display
-     *
-     * @param array parameters.
-     *
-     * @return scripts
-     */
-    public function getScriptTag(array $parameters = array())
-    {
-        $default = array(
-            'render' => 'onload',
-            'hl' => $this->_language,
-        );
-        $result = array_merge($default, $parameters);
-        $scripts = sprintf('<script type="text/javascript" src="%s?%s" async defer></script>',
-            self::api_url, http_build_query($result));
-        return $scripts;
-    }
-    /**
-     * render the reCAPTCHA widget
-     *
-     * data-theme: dark|light
-     * data-type: audio|image
-     *
-     * @param array parameters.
-     *
-     * @return scripts
-     */
-    public function getWidget(array $parameters = array())
-    {
-        $default = array(
-            'data-sitekey' => $this->_siteKey,
-            'data-theme' => 'light',
-            'data-type' => 'image',
-            'data-size' => 'normal',
-        );
-        $result = array_merge($default, $parameters);
-        $html = '';
-        foreach ($result as $key => $value) {
-            $html .= sprintf('%s="%s" ', $key, $value);
-        }
-        return '<div class="g-recaptcha" '.$html.'></div>';
     }
 }
